@@ -45,6 +45,7 @@ Let's documents our learnings on the go..
 39. Message-Report-Service Migration
 40. Pushing an image to a private Docker registry
 41. Find Tomcat Configuration (SLDMakerWS-Migration on K8s)
+42. CICD Pipeline : lokadalat-admin-main (10.246.82.151)
 -----------------------------------------------
 
 ### Case Studies
@@ -939,3 +940,36 @@ ssh etrans-infra-mon10@10.192.188.222
    sh version.sh
    ```
    
+## 42. CICD Pipeline : lokadalat-admin-main (10.246.82.151)
+* Jenkins Server: 10.246.82.163
+* path: ```/u01/jenkins_data/ansible```
+
+* On CLI: 
+1. .yml
+2. inventory
+3. roles --> war.name
+         --> defaults
+         --> main.yml
+```
+tomcats:
+ - name: 'lokadalat-admin-main'
+   tomcat_path: '/u01/lokadalat_8084'
+   tomcat_name: 'tomcat@lokadalat_8084'
+   war_name: 'lokadalat-admin-main'
+   server_name: 'lokadalat-admin-main_8084'
+   backend_name: 'lokadalat-admin-main'
+   tomcat_port: '8084'
+   url_name: '/lokadalat-admin-main/'
+   repository_url: 'http://10.246.82.134/repository/lokadalat-admin-main/'
+   repository_username: 'lokadalat-admin-main'
+   repository_password: 'lokadalat-admin-main'
+```
+
+On GUI: 
+1. New item: war_name (copy from existing)
+2. Permission: Developer
+3. Role:
+
+* war name: ```lokadalat-admin-main```
+
+* path: vim /u01/jenkins_data/ansible/roles/lokadalat-admin-main/defaults/main.yml
